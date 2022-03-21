@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact name="bible-presenter-patch:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/bible_presenter_patch_jar</output-path>
+    <root id="root">
+      <element id="archive" name="bible-presenter-patch.jar">
+        <element id="module-output" name="bible-presenter-patch" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/lib/jh.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/help.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/jdom.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/xalan.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/xml-apis.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/jlfgr-1_0.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/xercesImpl.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/biblepresenter.jar" />
+    </root>
+  </artifact>
+</component>
