@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: jh.jar help.jar jdom.jar xalan.jar xml-apis.jar jlfgr-1_0.
+ jar xercesImpl.jar biblepresenter.jar
+Main-Class: info.rueth.biblepresenter.gui.GUILauncher
+
