@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by master (xxxx) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:element name="XMLBIBLE">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="BIBLEBOOK" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PROLOG" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Eine Beschreibung des Bibelbuches</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="CHAPTER" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="VERS" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Der eigentliche Verstext und weitere XML Elemente.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:choice minOccurs="0" maxOccurs="unbounded">
+													<xs:element ref="DIV"/>
+												</xs:choice>
+												<xs:attribute name="vnumber" type="xs:positiveInteger" use="required">
+													<xs:annotation>
+														<xs:documentation>die Versnummer</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CAPTION" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Eine Ueberschrift</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute name="vref" type="xs:positiveInteger" use="optional"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="REMARK" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Anmerkungen</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute name="vref" type="xs:positiveInteger" use="optional">
+													<xs:annotation>
+														<xs:documentation>vref gibt die Versnummer im an zu der diese Anmerkung gehoert.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="vpas" type="xs:string" use="optional">
+													<xs:annotation>
+														<xs:documentation>vpas die Verspassage Z.B Joh 5,6-7; Pet 1,5</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="FOOTNOTE" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Fussnoten</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute name="vref" type="xs:positiveInteger" use="required">
+													<xs:annotation>
+														<xs:documentation>vref gibt die Versnummer im an zu der diese Fussnote gehoert.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="vpas" type="xs:string" use="optional">
+													<xs:annotation>
+														<xs:documentation>vpas die Verspassage Z.B Joh 5,6-7; Pet 1,5</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="XREF" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Parallelstellen</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute name="vref" type="xs:positiveInteger" use="required">
+													<xs:annotation>
+														<xs:documentation>vref gibt die Versnummer an zu der diese Parallelstelle gehoert.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="vpas" type="xs:string" use="optional">
+													<xs:annotation>
+														<xs:documentation>vpas die Verspassage Z.B Joh 5,6-7; Pet 1,5</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="vword" type="xs:string" use="optional">
+													<xs:annotation>
+														<xs:documentation>vword ein Word/Phrase auf das sich die Parallelstelle bezieht.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ATRANS" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Alternative Uebersetzung</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute name="vref" type="xs:positiveInteger" use="required">
+													<xs:annotation>
+														<xs:documentation>vref gibt die Versnummer an zu der diese aletrnative Uebersetzung gehoert.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="vpas" type="xs:string" use="optional">
+													<xs:annotation>
+														<xs:documentation>vpas die Verspassage Z.B Joh 5,6-7; Pet 1,5</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="vword" type="xs:string" use="optional">
+													<xs:annotation>
+														<xs:documentation>vword ein Wort/Phrase auf das sich die alternative Uebersetzung bezieht.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ILINEAR">
+											<xs:complexType>
+												<xs:attribute name="vref" type="xs:positiveInteger"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+									<xs:attribute name="cnumber" type="xs:positiveInteger" use="required">
+										<xs:annotation>
+											<xs:documentation>die Kapitelnummer</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="bnumber" type="xs:positiveInteger" use="required">
+							<xs:annotation>
+								<xs:documentation>Die Buchnummer der Bibelbuches ( 1.Mos=1;Mt=40)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="bname" type="xs:string" use="optional">
+							<xs:annotation>
+								<xs:documentation>Der Name des Bibelbuches (z.B. Roemerbrief)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="bgroup" use="optional">
+							<xs:annotation>
+								<xs:documentation>Ein Beschreibung der Bibelbuchgruppe ( z.B.x-Gospels)</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="x-Books of Moses"/>
+									<xs:enumeration value="x-Major Prophets"/>
+									<xs:enumeration value="x-Minor Prophets"/>
+									<xs:enumeration value="x-Wisdom Books"/>
+									<xs:enumeration value="x-OT Historical Books"/>
+									<xs:enumeration value="x-Epistles"/>
+									<xs:enumeration value="x-Apocalyptic Books"/>
+									<xs:enumeration value="x-Pauline Epistles"/>
+									<xs:enumeration value="x-Gospels"/>
+									<xs:enumeration value="x-Apocrypha"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="bfont" type="xs:string" use="optional">
+							<xs:annotation>
+								<xs:documentation>Der empfohlene Font fuer die Textdarstellung.</xs:documentation>
+								<xs:documentation>kann durch STYLE Element auf Versebene ueberschrieben werden</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="bgroupF" type="xs:string" use="optional">
+							<xs:annotation>
+								<xs:documentation>Bezeichnung fuer die Buchgruppe (userdefiniert)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="bsname" type="xs:string" use="optional">
+							<xs:annotation>
+								<xs:documentation>bsname enthält die Kurzbezeichnung für das Biblebuch  zB. Gen</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="INFORMATION">
+					<xs:annotation>
+						<xs:documentation>Beschreibt den Inhalt der XMLBIBLE  bibliographisch.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="title" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Titel ; der vom Verfasser,Urheber oder Verleger vergebene Namen der XMLBIBLE Datei</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="creator" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Die Person(en) oder Organisation(en), die den intellektuellen Inhalt verantworten.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="subject" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Thema, Schlagwort, Stichwort. Das Thema der Ressource bzw. Stichwoerter oder Phrasen, die das Thema</xs:documentation>
+									<xs:documentation>oder den Inhalt beschreiben.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Eine textliche Beschreibung des Ressourceninhalts.Dieses Feld kann einen Link zu einer solchen Beschreibung</xs:documentation>
+									<xs:documentation>enthalten statt der Beschreibung selbst.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="publisher" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Die Einrichtung, die verantwortet, dass diese XMLBIBLE in dieser Form zur Verfuegung steht</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="contributors" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Zusaetzliche Person(en) und Organisation(en) zu jenen, die im Element 2 CREATOR) genannt wurden,</xs:documentation>
+									<xs:documentation>die einen bedeutsamen intellektuellen Beitrag zur XMLBIBLE geleistet haben.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="date" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Das Datum, an dem die XMLBIBLE in der gegenwaertigen Form zugaenglich gemacht wurde.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="type" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>[UNESCO Thesaurus]</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Hier wird das datentechnische Format der Ressource eingetragen. Die Angabe in diesem Feld gibt die</xs:documentation>
+									<xs:documentation>erforderlichen Informationen, die es Menschen oder Maschinen ermoelichen, ueber die Verarbeitungsmoeglichkeiten</xs:documentation>
+									<xs:documentation>der kodierten Daten zu entscheiden.Hier: Zefania XML Bible Markup Language</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="identifier" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Hier wird eine Zeichenkette oder Zahl eingetragen, die diese XMLBIBLE eindeutig identifiziert.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="source" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>In diesem Element wird - falls noetig - das gedruckte oder elektronische Werk, aus dem diese XMLBIBLE stammt, eingetragen.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Hier werden die Sprache(n) des intellektuellen Inhalts dieser XMLBIBLE vermerkt.</xs:documentation>
+									<xs:documentation>Der Inhalt dieses Felds sollte moeglichst mit den dreistelligen Z39.53-Sprachcodes uebereinstimmen.</xs:documentation>
+									<xs:documentation>(Siehe: http://www.sil.org/sgml/nisoLang3-1994.html)</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="coverage" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Hier werden Angaben zur raeumlichen Bestimmung und zeitlichen Gueltigkeit eingetragen, </xs:documentation>
+									<xs:documentation>die die Ressource charakterisieren.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="rights" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Vorgesehen fur den Inhalt dieses Elements ist ein Link zu einem Urhebervermerk,</xs:documentation>
+									<xs:documentation>ein "Rights-Management"-Vermerk  uber die rechtlichen Bedingungen oder ggf. zu einem Server,</xs:documentation>
+									<xs:documentation>der solche Informationen dynamisch erzeugt. Nutzer dieses Feldes sollten vermeiden, Schlussfolgerungen</xs:documentation>
+									<xs:documentation>jeglicher Art zu ziehen, wenn dieses Feld leer oder nicht vorhanden ist.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Die Version der verwendeten Zefania XLM
+Bible Markup Language ( z.B. 1.0.0.3)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="encrypted" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation>Attribute 'encrypted'' zeigt dem XMLBible Parser an,
+ob der Inhalt zwischen den Vers Elementen verschluesselt
+ist oder nicht.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="status" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>How do I know if the markup is correct?
+SL: no check required
+O: Load in IE 5+---
+V: xp, xmetal, and other true validators
+A: requires human proofreading and interpretation
+C: there is always more that could be marked up</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="biblename" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Der Name der Bibel ( z.B. Lutherbibel 1984)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="revision" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Bearbeitungsstand der XML-Bible</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="lgid" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Sprach ID für die Darstellung der Buchbezeichnungen</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="bfont" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="S">
+		<xs:annotation>
+			<xs:documentation>Strongnummerelement ist ein Verweis auf ein externes XML Stronglexikon</xs:documentation>
+			<xs:documentation>STRONG Element schliesst ein Wort oder ein eine Phrase, deren</xs:documentation>
+			<xs:documentation>Strong(s) in strnr1- 4 stehen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="xs:anyType">
+					<xs:attribute name="sref" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>sref = Identifier, der es dem XMLBIBLE PARSER ermoeglicht,</xs:documentation>
+							<xs:documentation>die passende XML-Strongdatei zu ermitteln.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="strnr1" type="xs:positiveInteger" use="optional">
+						<xs:annotation>
+							<xs:documentation>Die Strongnummer zu dem/der vom STRONG Element.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="strnr2" type="xs:positiveInteger" use="optional">
+						<xs:annotation>
+							<xs:documentation>strnr2-5 sind Reserve.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="o" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Attribut zur Unterscheidung der Ausgangsquelle für die Strongs zb x-osis,x-zef u.s.w</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="l" type="xs:string" use="optional"/>
+					<xs:attribute name="m" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NOTE">
+		<xs:annotation>
+			<xs:documentation>Notizelement zur Verwendung innerhalb des Verstags</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="xs:anyType">
+					<xs:attribute name="type" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Type der Notiz ( Z.B x-StudyNote, x-ExterneNote)</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="nref" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>nref Identifier für eine externe XML-Notizdatei.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DIC">
+		<xs:annotation>
+			<xs:documentation>Das Woerterbuchelement schliesst ein Wort oder Phrase ein, die</xs:documentation>
+			<xs:documentation>als Parameter dem im Attributt (dref) referenzierten XML-Woerterbuch</xs:documentation>
+			<xs:documentation>uebergeben werden, um einen Eintrag anzuzeigen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="xs:anyType">
+					<xs:attribute name="dref" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation>Identifier, der es dem XMLBIBLE PARSER ermoeglicht,</xs:documentation>
+							<xs:documentation>die passende XML-Woerterbuchdatei zu ermitteln.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GRAM">
+		<xs:annotation>
+			<xs:documentation>Grammatikelement zur Klassifizierung des eingeschlossenen Wortes/Satzteiles</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="xs:anyType">
+					<xs:attribute name="woa" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation>Wortart</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="gen" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Genus</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="num" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Numeri</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="kas" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Kasus</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="inf" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Infinitiv</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="tmp" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Tempus</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="sta" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Wortstamm</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="mod" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Modi</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="gea" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>Genera</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="obj" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>naehere Angabe zum Satzglied</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="strong" type="xs:positiveInteger" use="optional">
+						<xs:annotation>
+							<xs:documentation>Strongnummer</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DIV">
+		<xs:annotation>
+			<xs:documentation>Containerelement zur Verwendung im Verstag.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IL">
+		<xs:annotation>
+			<xs:documentation>Markiert interlineare Partikel</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="pos" type="xs:positiveInteger" use="required">
+				<xs:annotation>
+					<xs:documentation>pos nummeriert die Reihenfolge der interlinearen Partikel im VERS bzw ILINEAR Tag</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
