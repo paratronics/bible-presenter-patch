@@ -5,23 +5,7 @@
 package info.rueth.biblepresenter.gui;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
+import info.rueth.biblepresenter.*;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -29,14 +13,12 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import info.rueth.biblepresenter.Bible;
-import info.rueth.biblepresenter.BibleContainer;
-import info.rueth.biblepresenter.BiblePresenterException;
-import info.rueth.biblepresenter.Book;
-import info.rueth.biblepresenter.Bookmark;
-import info.rueth.biblepresenter.Chapter;
-import info.rueth.biblepresenter.Preferences;
-import info.rueth.biblepresenter.Vers;
+import javax.swing.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 /**
@@ -68,7 +50,7 @@ public class DataSetter
 		if (!createBibleContainer())
 		{
 			this.bibleContainer = new BibleContainer();
-			
+
 			// we need an initial bible
 			if (!loadBible(new JFrame()))
 			{
@@ -116,7 +98,7 @@ public class DataSetter
 
 	/**
 	 * Returns all vers numbers of the specified chapter of the specified
-	 * book in the specified bible. 
+	 * book in the specified bible.
 	 * @param bibleName The bible name.
 	 * @param bookName The book name.
 	 * @param chapterNumber The chapter number.
@@ -218,7 +200,7 @@ public class DataSetter
 
 	/**
 	 * Returns the current end vers number.
-	 * @return Returns the end vers number. 
+	 * @return Returns the end vers number.
 	 */
 	public String getCurrentEndVersNumber()
 	{
@@ -318,15 +300,15 @@ public class DataSetter
 		filter.addExtension("xml");
 		filter.setDescription("XML Files");
 		chooser.setFileFilter(filter);
-		int returnVal = chooser.showOpenDialog(parent);
-		if (returnVal == JFileChooser.APPROVE_OPTION)
-		{
-			File selectedFile = chooser.getSelectedFile();
+//		int returnVal = chooser.showOpenDialog(parent);
+//		if (returnVal == JFileChooser.APPROVE_OPTION)
+//		{
+			File selectedFile = new File("etc/bibles/bbe.xml");
 			preferences.setLatestBibleDirectory(selectedFile.getParent());
 			loadBible(selectedFile);
 			return true;
-		}
-		return false;
+//		}
+//		return false;
 	}
 
 	/**
@@ -355,7 +337,7 @@ public class DataSetter
 					resources.getString("question_bibletoremove_title"),
 					JOptionPane.QUESTION_MESSAGE, null,
 					getBibleNames(), null);
-	
+
 			// If a string was returned, say so.
 			if (bibleToRemove != null)
 			{
@@ -372,7 +354,7 @@ public class DataSetter
 	/**
 	 * Loads the bible xml file with the specified file name.
 	 * @throws BiblePresenterException If the file is null, does not exist,
-	 * or cannot be read.  
+	 * or cannot be read.
 	 */
 	private void loadBible(File filename) throws BiblePresenterException
 	{
@@ -618,12 +600,11 @@ public class DataSetter
 	 */
 	public String toString()
 	{
-		StringBuffer newTitle = new StringBuffer(getCurrentBibleName());
-		newTitle.append(TITLE_DELIMITER);
+		StringBuilder newTitle = new StringBuilder();
 		newTitle.append(getCurrentBookName());
 		newTitle.append(" ");
 		newTitle.append(getCurrentChapterNumber());
-		newTitle.append(", ");
+		newTitle.append(":");
 		String startVers = getCurrentStartVersNumber();
 		newTitle.append(startVers);
 		String endVers = getCurrentEndVersNumber();
@@ -632,6 +613,10 @@ public class DataSetter
 			newTitle.append("-");
 			newTitle.append(endVers);
 		}
+		// newTitle.append(TITLE_DELIMITER);
+		newTitle.append(" (");
+		newTitle.append(getCurrentBibleName());
+		newTitle.append(")");
 		return newTitle.toString();
 	}
 
